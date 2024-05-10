@@ -60,17 +60,24 @@ function scrapeLinkedInPage() {
     title = item.querySelector("span");
     company = item.querySelector("span span");
     time = item.querySelectorAll("span span")[2];
+
+    if (item.querySelector("ul") != null) {
+      title = item.querySelector("ul li div span");
+      company = null;
+      time = item.querySelector("span span");
+    }
+
     let result = [];
     if (title) {
-      console.log(title.innerHTML.replace(/<!--.*?-->/g, ""));
+      // console.log(title.innerHTML.replace(/<!--.*?-->/g, ""));
       result.push(title.innerHTML.replace(/<!--.*?-->/g, ""));
     }
     if (company) {
-      console.log(company.innerHTML.replace(/<!--.*?-->/g, ""));
+      // console.log(company.innerHTML.replace(/<!--.*?-->/g, ""));
       result.push(company.innerHTML.replace(/<!--.*?-->/g, ""));
     }
     if (time) {
-      console.log(time.innerHTML.replace(/<!--.*?-->/g, ""));
+      // console.log(time.innerHTML.replace(/<!--.*?-->/g, ""));
       result.push(time.innerHTML.replace(/<!--.*?-->/g, ""));
     }
     if (result && result.length != 0) {
