@@ -51,11 +51,10 @@ function scrapeLinkedInPage() {
   // find all work history items
   let experiences = [];
   let education_experiences = [];
-  let experience_list = document.querySelector(
-    "#experience~div.TkvwWYFmstiQVaNJRfuXFjnCBNxxMXhDpeNM ul.mdGTjoiZcTUVRrqfWbLiuFkJyoccCZHcsQOn"
-  );
+  let experience_list = document.querySelector("#experience~div ul");
+  console.log(experience_list);
   let work_history_items = experience_list.querySelectorAll(
-    "#experience~div.TkvwWYFmstiQVaNJRfuXFjnCBNxxMXhDpeNM ul.mdGTjoiZcTUVRrqfWbLiuFkJyoccCZHcsQOn li.artdeco-list__item.NlJxckvmNzKcfreMIQBiPygxRtWmkoEZYUjJTnYA.yfAOsyenPadSLFtETNKdQlAYucfYzqyqI"
+    "#experience~div>ul>li"
   );
   work_history_items.forEach((item) => {
     title = item.querySelector("span");
@@ -63,15 +62,15 @@ function scrapeLinkedInPage() {
     time = item.querySelectorAll("span span")[2];
     let result = [];
     if (title) {
-      // console.log(title.innerHTML.replace(/<!--.*?-->/g, ""));
+      console.log(title.innerHTML.replace(/<!--.*?-->/g, ""));
       result.push(title.innerHTML.replace(/<!--.*?-->/g, ""));
     }
     if (company) {
-      // console.log(company.innerHTML.replace(/<!--.*?-->/g, ""));
+      console.log(company.innerHTML.replace(/<!--.*?-->/g, ""));
       result.push(company.innerHTML.replace(/<!--.*?-->/g, ""));
     }
     if (time) {
-      // console.log(time.innerHTML.replace(/<!--.*?-->/g, ""));
+      console.log(time.innerHTML.replace(/<!--.*?-->/g, ""));
       result.push(time.innerHTML.replace(/<!--.*?-->/g, ""));
     }
     if (result && result.length != 0) {
@@ -81,12 +80,8 @@ function scrapeLinkedInPage() {
 
   // find all education history items
   let education_list = document
-    .querySelector(
-      "#education~div.TkvwWYFmstiQVaNJRfuXFjnCBNxxMXhDpeNM ul.mdGTjoiZcTUVRrqfWbLiuFkJyoccCZHcsQOn"
-    )
-    .querySelectorAll(
-      "#education~div.TkvwWYFmstiQVaNJRfuXFjnCBNxxMXhDpeNM ul.mdGTjoiZcTUVRrqfWbLiuFkJyoccCZHcsQOn li"
-    );
+    .querySelector("#education~div ul")
+    .querySelectorAll("#education~div ul li");
   education_list.forEach((item) => {
     school = item.querySelector(
       "div.display-flex.align-items-center.mr1.t-bold span"
