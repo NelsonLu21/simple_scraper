@@ -52,78 +52,87 @@ function scrapeLinkedInPage() {
   let experiences = [];
   let education_experiences = [];
   let experience_list = document.querySelector("#experience~div ul");
-  console.log(experience_list);
-  let work_history_items = experience_list.querySelectorAll(
-    "#experience~div>ul>li"
-  );
-  work_history_items.forEach((item) => {
-    title = item.querySelector("span");
-    company = item.querySelector("span span");
-    time = item.querySelectorAll("span span")[2];
+  if (experience_list) {
+    // console.log(experience_list);
+    let work_history_items = experience_list.querySelectorAll(
+      "#experience~div>ul>li"
+    );
+    work_history_items.forEach((item) => {
+      title = item.querySelector("span");
+      company = item.querySelector("span span");
+      time = item.querySelectorAll("span span")[2];
 
-    if (item.querySelector("ul") != null) {
-      title = item.querySelector("ul li div span");
-      company = null;
-      time = item.querySelector("span span");
-    }
+      if (item.querySelector("ul") != null) {
+        title = item.querySelector("ul li div span");
+        company = null;
+        time = item.querySelector("span span");
+      }
 
-    let result = [];
-    if (title) {
-      // console.log(title.innerHTML.replace(/<!--.*?-->/g, ""));
-      result.push(title.innerHTML.replace(/<!--.*?-->/g, ""));
-    }
-    if (company) {
-      // console.log(company.innerHTML.replace(/<!--.*?-->/g, ""));
-      result.push(company.innerHTML.replace(/<!--.*?-->/g, ""));
-    }
-    if (time) {
-      // console.log(time.innerHTML.replace(/<!--.*?-->/g, ""));
-      result.push(time.innerHTML.replace(/<!--.*?-->/g, ""));
-    }
-    if (result && result.length != 0) {
-      experiences.push(result);
-    }
-  });
+      let result = [];
+      if (title) {
+        // console.log(title.innerHTML.replace(/<!--.*?-->/g, ""));
+        result.push(title.innerHTML.replace(/<!--.*?-->/g, ""));
+      }
+      if (company) {
+        // console.log(company.innerHTML.replace(/<!--.*?-->/g, ""));
+        result.push(company.innerHTML.replace(/<!--.*?-->/g, ""));
+      }
+      if (time) {
+        // console.log(time.innerHTML.replace(/<!--.*?-->/g, ""));
+        result.push(time.innerHTML.replace(/<!--.*?-->/g, ""));
+      }
+      if (result && result.length != 0) {
+        experiences.push(result);
+      }
+    });
+  }
 
   // find all education history items
-  let education_list = document
-    .querySelector("#education~div ul")
-    .querySelectorAll("#education~div ul li");
-  education_list.forEach((item) => {
-    school = item.querySelector(
-      "div.display-flex.align-items-center.mr1.t-bold span"
-    );
-    degree = item.querySelector("[class='t-14 t-normal']");
-    degree_time = item.querySelector("span.t-14.t-normal.t-black--light span");
-    let result2 = [];
-    if (school) {
-      // console.log(school.innerHTML.replace(/<!--.*?-->/g, ""));
-      result2.push(school.innerHTML.replace(/<!--.*?-->/g, ""));
-    }
-    if (degree) {
-      /*
-      console.log(
-        degree.innerHTML
-          .replace(/<.*?>/g, "")
-          .trim()
-          .slice(0, degree.innerHTML.replace(/<.*?>/g, "").trim().length / 2)
+
+  let education_list = document.querySelector("#education~div ul");
+  if (education_list) {
+    education_list = document.querySelectorAll("#education~div ul li");
+  }
+  if (education_list) {
+    education_list.forEach((item) => {
+      school = item.querySelector(
+        "div.display-flex.align-items-center.mr1.t-bold span"
       );
-      */
-      result2.push(
-        degree.innerHTML
-          .replace(/<.*?>/g, "")
-          .trim()
-          .slice(0, degree.innerHTML.replace(/<.*?>/g, "").trim().length / 2)
+      degree = item.querySelector("[class='t-14 t-normal']");
+      degree_time = item.querySelector(
+        "span.t-14.t-normal.t-black--light span"
       );
-    }
-    if (degree_time) {
-      //console.log(degree_time.innerHTML.replace(/<!--.*?-->/g, ""));
-      result2.push(degree_time.innerHTML.replace(/<!--.*?-->/g, ""));
-    }
-    if (result2 && result2.length != 0) {
-      education_experiences.push(result2);
-    }
-  });
+      let result2 = [];
+      if (school) {
+        // console.log(school.innerHTML.replace(/<!--.*?-->/g, ""));
+        result2.push(school.innerHTML.replace(/<!--.*?-->/g, ""));
+      }
+      if (degree) {
+        /*
+        console.log(
+          degree.innerHTML
+            .replace(/<.*?>/g, "")
+            .trim()
+            .slice(0, degree.innerHTML.replace(/<.*?>/g, "").trim().length / 2)
+        );
+        */
+        result2.push(
+          degree.innerHTML
+            .replace(/<.*?>/g, "")
+            .trim()
+            .slice(0, degree.innerHTML.replace(/<.*?>/g, "").trim().length / 2)
+        );
+      }
+      if (degree_time) {
+        //console.log(degree_time.innerHTML.replace(/<!--.*?-->/g, ""));
+        result2.push(degree_time.innerHTML.replace(/<!--.*?-->/g, ""));
+      }
+      if (result2 && result2.length != 0) {
+        education_experiences.push(result2);
+      }
+    });
+  }
+
   console.log("Here is the information: ");
   console.log(name);
   console.log(job_title);
