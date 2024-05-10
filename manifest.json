@@ -1,0 +1,14 @@
+{
+    "name": "Web Scraper Demo",
+    "description": "Scrapes LinkedIn pages for information",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting"
+    ]
+}
